@@ -1,0 +1,93 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="bootstrap-3.3.5-dist\css\bootstrap.min.css">
+<link rel="stylesheet" href="font-awesome-4.6.3\css\font-awesome.min.css">
+
+<script src="js/jquery-3.0.0.min.js"></script>
+<script src="js/jquery.color.js"></script>
+
+<script>
+
+ $(function() {
+    d();
+    
+    $('#btn').click(function() {
+
+     d();
+  });
+});
+
+ function d() {
+   $.ajax({
+    beforeSend: function(request) {
+        request.setRequestHeader("apikey", 'f1b055791ca90bfbbc14520368de4d46');
+    },
+    dataType: "json",
+    url: 'http://apis.baidu.com/acman/zhaiyanapi/tcrand?fangfa=json',
+    success: function(data) {
+     $('.b,#btn').animate({backgroundColor: randColor},1000);
+     $('.quote,#tubiao,#tubiao1,#tt').animate({color: randColor},1000);
+     $('.b,#btn').css('background-color', randColor);
+     $('.quote,#tubiao,#tubiao1,#tt').css('color', randColor);
+     $("#wt,#quote,#wz").fadeOut(400,function(){
+     $("#wz").html(data.taici);
+     $("#wt").html(data.source);
+
+     $("#wt,#quote,#wz").fadeIn(600); 
+     });  
+    }
+   });
+
+   var colors = ['red', 'blue', 'green', 'grey','gray','silver','purple','olive','orange'],
+      color;
+    var randColor;
+    do {
+      randColor = colors[Math.floor(Math.random() * colors.length)];
+    } while (color == randColor);  
+    color = randColor;   
+  };
+
+
+</script>
+
+<style>
+.b{background-color:black;font-family:"微软雅黑";}
+#a{margin:20% 0% 0% 11%;padding-bottom:0%;width:80%;border:none;border-radius:1%;}
+
+.quote{padding-top:25px;margin:0% 5%;font-size:30px;}
+
+#tubiao,#tubiao1{font-size:35px;}
+
+#btn{padding-right:10px; border:none;color:white;background-color: black;}
+
+}
+
+
+</style>
+
+
+<body class="b" >
+<div id="a"  style="background:white;" > 
+     <div class="quote text-center"  >
+      <span id="quote" class="fa fa-quote-left " aria-hidden="true"></span>
+      <span id="wz" style="font-size:30;"></span>
+     </div>
+
+     <div id="tt" class="row" style="font-size:18px;">
+     <span id="wt" class="col-xs-5 col-xs-offset-7 text-center"></span>
+     </div>
+    <div class="row" style="padding-right:40px">
+     <div class="col-lg-2 col-xs-2 text-right"><span id="tubiao" ><i class="fa fa-twitter-square btn" > </i></span></div>
+     <div class="col-lg-2 col-xs-2 text-left"><span id="tubiao1"><i class="fa fa-tumblr-square btn"  > </i></span></div>
+     <div class="col-lg-4 col-xs-4"></div>
+     <div class="col-lg-4 col-xs-4  text-center" style="margin-top:6px;"><span class="btn" type="button" id="btn" style="font-size:14px;outline:none;">New quote</span> </div>
+    </div>
+ </div>
+
+ <div class="text-center " style="color:white;">
+     by&nbsp;<a style="text-decoration:none; color:white;" href="#">peipei</a>
+</div>
+</body>
+
+</html>
